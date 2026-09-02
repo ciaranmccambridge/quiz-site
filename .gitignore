@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+
+# Full-length source tracks you cut clips from. These are big and shouldn't go
+# in a public repo -- only the short clips in audio/ get committed.
+source/

@@ -1,0 +1,28 @@
+// Paste into: Firebase console -> Firestore Database -> Rules -> Publish.
+//
+// These rules are deliberately wide open for the duration of the quiz: anyone
+// with the link can write their own submission and read everyone else's. That's
+// the intended behaviour for a throwaway round among coworkers, and it's what
+// lets the site work with no login system at all.
+//
+// The expiry date is the safety net. Even if you forget to tear the project
+// down, the window shuts on its own and the data becomes unreachable.
+//
+// >>> SET THIS DATE BEFORE PUBLISHING: a day or two after your quiz. <<<
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // One document per player, under the session named in assets/quiz-data.js.
+    match /quiz/{sessionId}/submissions/{playerId} {
+      allow read, write: if request.time < timestamp.date(2026, 9, 6);
+    }
+
+    // Everything else stays shut, so a stray path can't be used as free storage.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

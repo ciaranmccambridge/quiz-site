@@ -1,0 +1,10 @@
+{
+  "name": "quiz-site",
+  "private": true,
+  "type": "module",
+  "description": "Static quiz site for soundboarding a pub-quiz music round. No build step; type:module exists only so node can run the tests/ suite against the browser ES modules.",
+  "scripts": {
+    "test": "node tests/match.test.mjs && node tests/flow.test.mjs && node tests/leaderboard.test.mjs && python3 tests/check_wiring.py",
+    "serve": "python3 -m http.server 8765"
+  }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Music Round</title>
+    <meta name="description" content="A quiz music round, being tested before it goes live." />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🎵</text></svg>"
+    />
+  </head>
+  <body>
+    <main class="shell">
+      <!-- Shown when assets/firebase.js has no config: the quiz still works,
+           but nothing is shared. Unhidden by app.js. -->
+      <p class="banner" id="local-only-banner" hidden>
+        <strong>Local mode.</strong> Firebase isn’t configured, so your score stays in this browser
+        and won’t reach the leaderboard.
+      </p>
+
+      <!-- ------------------------------------------------------ login -->
+      <section class="card" id="login-view" hidden>
+        <h1 id="round-title">Music Round</h1>
+        <p class="blurb" id="round-blurb"></p>
+
+        <form id="login-form" autocomplete="off">
+          <label class="field">
+            <span class="field-label">Your name</span>
+            <input
+              type="text"
+              id="username-input"
+              placeholder="e.g. Ciaran"
+              maxlength="40"
+              required
+              autocapitalize="words"
+            />
+          </label>
+          <button type="submit" class="primary">Start the round</button>
+        </form>
+      </section>
+
+      <!-- ------------------------------------------------------- quiz -->
+      <!-- Every question is on this one page. The header sticks to the top so
+           the running score stays visible while scrolling. -->
+      <section id="quiz-view" hidden>
+        <div class="quiz-bar">
+          <div class="meta">
+            <span id="progress-label"></span>
+            <span id="score-label"></span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
+
+        <h1 id="quiz-title">Music Round</h1>
+        <p class="blurb" id="quiz-blurb"></p>
+
+        <!-- One card per question, built once by app.js. Only a card's answer
+             area is re-rendered on submit, so audio playing in another card
+             keeps going. -->
+        <div id="question-list"></div>
+
+        <!-- Appears at the bottom once every question has been answered. -->
+        <section class="card done-panel" id="done-panel" hidden>
+          <h2 class="done-heading">Round complete</h2>
+          <p class="final-score" id="final-score"></p>
+          <p class="blurb" id="done-note"></p>
+          <a class="primary as-button" id="leaderboard-link" href="leaderboard/">
+            See the leaderboard
+          </a>
+          <button type="button" class="ghost" id="restart-button">Start again</button>
+        </section>
+      </section>
+
+      <footer class="foot">
+        <a href="leaderboard/">Leaderboard</a>
+      </footer>
+    </main>
+
+    <script type="module" src="assets/app.js"></script>
+  </body>
+</html>
