@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leaderboard</title>
+    <!-- One directory down, so assets are ../ from here. -->
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🏆</text></svg>"
+    />
+  </head>
+  <body>
+    <main class="shell wide">
+      <h1>Leaderboard</h1>
+      <p class="blurb" id="subtitle">Connecting…</p>
+
+      <!-- Shown when Firebase isn't configured, or the subscription fails. -->
+      <p class="banner error" id="error-banner" hidden></p>
+
+      <div class="table-scroll">
+        <table id="scores-table" hidden>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th class="numeric">Score</th>
+              <th class="numeric">Done</th>
+            </tr>
+          </thead>
+          <tbody id="scores-body"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="scores-empty" hidden>No one has played yet.</p>
+
+      <h2>Answer breakdown</h2>
+      <p class="blurb">
+        Every answer as it was actually typed. A low hit rate means the question is too hard — or
+        that the matcher was too strict, which you can judge for yourself here.
+      </p>
+      <div id="breakdown"></div>
+
+      <footer class="foot"><a href="../">Back to the quiz</a></footer>
+    </main>
+
+    <script type="module" src="../assets/leaderboard.js"></script>
+  </body>
+</html>
